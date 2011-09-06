@@ -1,0 +1,10 @@
+function dxdt=MyODE03(t,x)
+% This function, given t and x must return dxdt. Note that for the 1-D
+% projectile motion, dxdt is now a two element row vector
+
+dxdt=zeros(2,1); %initialize variables
+
+g=9.8;
+
+dxdt(1)=x(1)/t;        % INSERT EQUATION dy/dt=v HERE
+dxdt(2)=-g;        % INSERT EQUATION dv/dt=-g HERE

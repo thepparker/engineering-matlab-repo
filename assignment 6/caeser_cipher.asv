@@ -1,0 +1,19 @@
+function encrypted = caeser_cipher(message,shift)
+    x = 1;
+    encrypted = zeros(1,length(message)); %empty 1xlength of message matrix
+    %go through for every character in the message
+    while x <= length(message)
+       %don't do anything to spaces
+       if message(x) == char(32) 
+            encrypted(x) = 32;
+            x = x + 1;
+            continue %go to next loop
+       end
+       encrypted(x) = message(x) + shift; %put the ascii val
+       if encrypted(x) > 122
+            encrypted(x) = encrypted(x) - 26;
+       end
+       x = x + 1;
+    end
+    fprintf('Encoded string with shift of %d: %s\n',shift,char(encrypted));
+end

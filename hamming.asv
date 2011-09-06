@@ -1,0 +1,27 @@
+function hcword = hamming(fourbits)
+% Turn a 4x1 vector (fourbits) into a 7x1 vector with parity bits, a hamming codeword (hcword)
+    %hcword (the 
+    hcword = zeros(7,1); %create an empty 7x1 vector
+    
+    %generate parity bits
+    %c7c6c5c4c3c2c1 = b4b3b2p3b1p2p1
+    %b4b3b2p3
+    %b4b3b1p2
+    %b4b2b1p1
+    %get each bit from the fourbit string
+    parity = zeros(1,3); %empty 1x3 vector for parity bits
+    parity(3) = xor(xor(fourbits(4,1),fourbits(3,1)),fourbits(2,1)); %parity bit 3 (p3) xor(xor(b4,b3),b2)
+    parity(2) = xor(xor(fourbits(4,1),fourbits(3,1)),fourbits(1,1)); %parity bit 2 (p2) xor(xor(b4,b3),b1)
+    parity(1) = xor(xor(fourbits(4,1),fourbits(2,1)),fourbits(1,1)); %parity bit 1 (p1) xor(xor(b4,b2),b1)
+    
+    %insert the parity bits and the original bits into the empty hcword
+    %vector in the format p1p2b1p3b2b3b4
+    hcword(1,1) = parity(1); %p1
+    hcword(2,1) = parity(2); %p2
+    hcword(3,1) = fourbits(1,1); %b1
+    hcword(4,1) = parity(3); %p3 
+    hcword(5,1) = fourbits(2,1); %b2
+    hcword(6,1) = fourbits(3,1); %b3
+    hcword(7,1) = fourbits(4,1); %b4
+    
+end

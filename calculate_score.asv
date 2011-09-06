@@ -1,0 +1,23 @@
+function calculate_score(wins,losses,draws)
+% Function to calculate a person's "score" based on the number of wins,
+% losses and draws they've had.
+% A win is worth 3 points, a loss 1 point and a draw 2 points
+
+    playerPoints = 0;
+    winPoints = 3;
+    lossPoints = 1;
+    drawPoints = 2;
+    
+    x = 1;
+    if ~issempty(wins)
+        while x <= length(wins)
+            playerPoints = playerPoints + winPoints;
+            x = x + 1;
+        end
+    end
+    if ~issempty(draws)
+        while 
+    end
+
+
+end

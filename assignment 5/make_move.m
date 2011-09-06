@@ -1,0 +1,54 @@
+function board = make_move(board, player)
+%MAKE_MOVE Determine the next move of a player for tic tac toe
+%   Given a board setup and a player, determine the "best" move for the 
+%   current player and update and return the board setup after this move 
+%   has been made.
+%
+%   The process is :
+%       1. Find a winning position. If found, make the move and exit
+%       the function;
+%       2. Find a position to block the other player from winning. If 
+%       found, make the move and exit the function;
+%       3. Otherwise, make a move to a random free location
+% 
+    moved = 0; %used to check if a player has moved (for the while loop)
+    boardSize = length(board); 
+    %we're going to try changing each individual 0 position to see if
+    %it's a good move, x is rows, y is column
+    for x = 1:boardSize %each row
+        for y = 1:boardSize %each column in row x
+            if (board(x,y)) == 0
+                %put the player marker (-1 or 1) onto the board in pos x,y
+                board(x,y) = player; 
+                if check_win(board) == player %check if x,y is a win pos.
+                    return %return the board as is, with player in win pos.
+                end
+                %because it wasn't a win position, check if it's a block
+                %position (-1*player puts the other player's marker in)
+                board(x,y) = -1*player;
+                if check_win(board) == -1*player %if other player can win:
+                    %put the current player's marker in the pos. x,y (as
+                    %it's a block position)
+                    board(x,y) = player; 
+                    return
+                end
+                board(x,y) = 0; %reset the position to 0 after doing checking
+                                %and no win/block move was possible
+            end
+        end
+    end
+    %try random positions (x,y) until an empty one is picked and place the
+    %player's marker there
+    while ~moved %(while moved is 0 (false))
+        x = randi(3); %random between 1 and 3 (including 1 and 3)
+        y = randi(3);
+        
+        if board(x,y) == 0 %no player has already moved there
+            board(x,y) = player;
+            moved = 1; %set moved to 1, so the loop will end
+        end
+    end
+end
+
+
+

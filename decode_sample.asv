@@ -1,0 +1,7 @@
+function dcdham = decode_sample(sample)
+% Take a 7x4 hamming matrix with errors and decode it, fixing errors in the
+% process
+    corrected = correct(sample);
+    dcdham = assemble(corrected);
+    
+end

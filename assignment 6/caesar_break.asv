@@ -1,0 +1,22 @@
+function decrypted = caesar_break(message)
+    x = 1;
+    decrypted = zeros(1,length(message));
+    
+    for y = 1:25
+        while x <= length(message)
+           if message(x) == char(32) 
+                x = x + 1;
+                continue
+           end
+           decrypted(x) = message(x) + shift;
+           if decrypted(x) > 122
+                decrypted(x) = decrypted(x) - 26;
+           end
+           x = x + 1;
+        end
+        
+    end
+    
+    decrypted = char(decrypted);
+
+end

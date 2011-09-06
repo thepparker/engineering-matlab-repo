@@ -1,0 +1,47 @@
+function winner = check_win( board )
+%CHECK_WIN Determine whether a player has a winning game in tic tac toe 
+%on a 3x3 board.
+%   The winner is decided as the player who gets three of their symbols 
+%   in a row - either vertically, horizontally or diagonally. 
+%   The winner is returned as 1 for Player 1,-1 for Player 2 or 
+%   0 for a draw.
+    p2Win = -3; %sum of row/column/diagonal for player 2 to win
+    p1Win = 3; %sum of row/column/diagonal for player 1 to win
+    boardSize = length(board); %should always be 3
+    
+    if sum(diag(board)) == p2Win
+        winner = -1;
+        return
+    elseif diag(fliplr(board)) == p2Win
+        winner = -1;
+        return
+    elseif diag(board) == p1Win
+        winner = 1;
+        return
+    elseif diag(fliplr(board)) == p1Win
+        winner = 1;
+        return
+    end
+    
+    for x = 1:boardSize
+        if sum(board(:,x)) == p1Win
+            winner = 1;
+            return
+        elseif sum(board(:,x)) == p2Win
+            winner = -1;
+            return
+        elseif sum(board(x,:)) == p1Win
+            winner = 1;
+            return
+        elseif sum(board(x,:)) == p2Win
+            winner = -1;
+            return
+        end
+    end 
+    
+    if ~winner
+        winner = 0; %DRAW!
+    end
+    
+end
+
